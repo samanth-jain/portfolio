@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samanth Jain - Portfolio</title>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">     -->
+    <link href="https://fonts.cdnfonts.com/css/freemono" rel="stylesheet">                
+                
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            font-family: 'FreeMono', sans-serif;
+                                                
+        }
+
+        body {
+            line-height: 1.6;
+            color: #ffffff;
+            background-color: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .profile-info {
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .profile-info h1 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-info a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.8em;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .contact-info a:hover {
+            color: #00ff00;
+            transform: translateY(-3px);
+        }
+
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #00ff00;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .contact-info a:hover::after {
+            transform: scaleX(1);
+        }
+
+        section {
+            margin: 100px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            color: #00ff00;
+            margin-bottom: 30px;
+            font-size: 1.5em;
+            <!-- text-transform: uppercase; -->
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .skill-tag {
+            background: #1a1a1a;
+            color: #00ff00;
+            padding: 10px 20px;
+            font-size: 0.7em;
+            border: 1px solid #00ff00;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: #00ff00;
+            color: #000000;
+            transform: scale(1.05);
+        }
+
+        .experience-item {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: #1a1a1a;
+            border-left: 3px solid #00ff00;
+        }
+
+        .experience-item h3 {
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .experience-item .duration {
+            color: #00ff00;
+            font-size: 0.7em;
+            margin-bottom: 15px;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            font-size: 0.7em;
+        }
+
+        .experience-item li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .experience-item li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: #00ff00;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: #1a1a1a;
+            padding: 20px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #00ff00;
+            box-shadow: 0 0 20px rgba(0,255,0,0.1);
+        }
+
+        .project-card h3 {
+            color: #00ff00;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .project-card p {
+            font-size: 0.7em;
+            margin-bottom: 15px;
+        }
+
+        .project-card a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.7em;
+            transition: color 0.3s;
+        }
+
+        .project-card a:hover {
+            color: #00ff00;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .tech-tag {
+            background: #000000;
+            color: #00ff00;
+            padding: 5px 10px;
+            font-size: 0.6em;
+            border: 1px solid #00ff00;
+            transition: all 0.3s;
+        }
+
+        .tech-tag:hover {
+            background: #00ff00;
+            color: #000000;
+            transform: scale(1.05);
+        }
+
+        .typing-container {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .typing-text {
+            position: relative;
+            padding-right: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 2s steps(20) forwards;
+        }
+
+        .cursor {
+            position: relative;
+            width: 3px;
+            height: 1em;
+            background-color: #00ff00;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1 }
+            50%, 100% { opacity: 0 }
+        }
+
+        .terminal-prefix {
+            color: #00ff00;
+            margin-bottom: 20px;
+            font-size: 0.8em;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .profile-info h1 {
+                font-size: 1.5em;
+            }
+
+            .section-title {
+                font-size: 1.2em;
+            }
+        }
+
+        .scroll-indicator-container {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-text {
+            color: #00ff00;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-arrow {
+            color: #00ff00;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-info">
+                <div class="terminal-prefix">> whoami</div>
+                <h1>
+                    <div class="typing-container">
+                        <div class="typing-text">samanth jain</div>
+                        <div class="cursor"></div>
+                    </div>
+                </h1>
+                <div class="contact-info">
+                    <a href="mailto:samanthjainsb@gmail.com">samanthjainsb@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/s-b-samanth-jain-7a35a6227/" target="_blank">linkedIn</a>
+                    <a href="http://www.github.com/samanth-jain" target="_blank">github</a>
+                    <!-- <a href="tel:+918884312209">+91 8884312209</a>  -->
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator-container">
+            <div class="scroll-text">scroll</div>
+            <div class="scroll-arrow">▼</div>
+        </div> 
+    </header>
+
+    <main class="container">
+        <section>
+            <h2 class="section-title">Skills</h2>
+            <div class="skill-tags">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Java</span>
+                <!-- <span class="skill-tag">Golang</span> -->
+                <span class="skill-tag">Django</span>
+                <span class="skill-tag">Spring Boot</span>
+                <span class="skill-tag">React.JS</span>
+                <span class="skill-tag">AWS</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">MongoDB</span>
+                <span class="skill-tag">PostgreSQL</span>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-item">
+                <h3>Software Engineer Intern - DocuStack.ai</h3>
+                <div class="duration">Sep 2024 - Present</div>
+                <ul>
+                    <li>Developed microservices using Python</li>
+                    <li>Integrated OpenAI, Langchain, Deepgram(Nova)</li>
+                    <li>Implemented AWS S3 storage solutions</li>
+                    <li>Researched ML models and OCR technologies</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Technical Intern - Airports Authority of India</h3>
+                <div class="duration">Nov 2023 - Dec 2023</div>
+                <ul>
+                    <li>Built data visualization application</li>
+                    <li>Developed interactive analysis tools</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>CodeStrike</h3>
+                    <p>1v1 competitive coding platform with microservices</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">AWS EC2</span>
+                        <span class="tech-tag">WebSocket</span>
+                    </div>
+                    <a href="https://github.com/samanth-jain/codestrike-backend" target="_blank">View Project →</a>
+                </div>
+                <div class="project-card">
+                    <h3>Dance School Website</h3>
+                    <p>Full-stack web application with Django & React</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">JWT</span>
+                        <span class="tech-tag">REST API</span>
+                    </div>
+                    <a href="https://github.com/samanth-jain/Aradanaschool" target="_blank">View Project →</a>
+                </div>
+                <div class="project-card">
+                    <h3>Ray Tracer</h3>
+                    <p>3D scene renderer using ray tracing algorithm</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">Vector Math</span>
+                        <span class="tech-tag">3D Graphics</span>
+                    </div>
+                    <a href="https://github.com/samanth-jain/RayTracer-in-Python" target="_blank">View Project →</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Education</h2>
+            <div class="experience-item">
+                <h3>B.E. in Information Science Engineering</h3>
+                <div class="duration">Dec 2021 - Jul 2025</div>
+                <ul>
+                    <li>CMR Institute of Technology, Bengaluru</li>
+                    <li>CGPA: 8.33</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Intersection Observer for section animations
+        const typeName = async () => {
+            const name = "SAMANTH JAIN";
+            const typedElement = document.getElementById("typed-name");
+            const cursorElement = document.querySelector('.terminal-cursor'); // Select the cursor element
+            const delay = 100; // Delay between each character (milliseconds)
+    
+            for (let i = 0; i < name.length; i++) {
+                await new Promise(resolve => setTimeout(resolve, delay));
+                typedElement.textContent += name[i];
+                cursorElement.style.opacity = 1; // Show cursor
+                await new Promise(resolve => setTimeout(resolve, delay)); // Keep cursor visible for a moment
+                cursorElement.style.opacity = 0; // Hide cursor
+            }
+        };
+
+        // Start typing effect when page loads
+        window.addEventListener('load', typeName);
+
+        // Previous intersection observer code remains the same
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('section').forEach((section) => {
+            observer.observe(section);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+
+    </script>
+</body>
+</html>
